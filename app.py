@@ -14,7 +14,7 @@ input_text = st.text_area("Enter text to analyze:", placeholder="Type something 
 if st.button("Analyze Sentiment"):
     if input_text.strip():
         with st.spinner("Analyzing sentiment..."):
-            results = sentiment_pipeline(input_text)
+            results = pipeline(input_text)
         
         # Display Results
         st.subheader("Results:")
