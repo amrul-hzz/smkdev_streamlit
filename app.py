@@ -10,20 +10,18 @@ pipeline = pipeline("sentiment-analysis")
 # Create two columns
 col1, col2 = st.columns(2)
 
-# Input Text in Column 1
+# Input Text and Analyze Button in Column 1
 with col1:
     input_text = st.text_area("Enter text to analyze:", placeholder="Type something here...")
-
-# Analyze Button and Results in Column 2
-with col2:
     if st.button("Analyze Sentiment"):
         if input_text.strip():
             with st.spinner("Analyzing sentiment..."):
-                results = sentiment_pipeline(input_text)
+                results = pipeline(input_text)
             
-            # Display Results
-            st.subheader("Results:")
-            for result in results:
-                st.write(f"**Label:** {result['label']}, **Confidence:** {result['score']:.2f}")
+            # Display Results in Column 2
+            with col2:
+                st.subheader("Results:")
+                for result in results:
+                    st.write(f"**Label:** {result['label']}, **Confidence:** {result['score']:.2f}")
         else:
             st.error("Please enter some text to analyze.")
